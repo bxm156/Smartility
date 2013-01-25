@@ -1,0 +1,44 @@
+@import "retina.less";
+@import "settings.less";
+
+body {
+	.at2x('/static/images/tiles/pw_maze_white.png', 198px, 200px);
+	background-repeat: repeat;
+}
+
+.space-40 {
+	height: 40px;
+}
+
+.img-logo-150 {
+	.at2x('/static/images/logo_150.png',100px, @logo-height);
+	background-size: 100px @logo-height;
+}
+
+.logo-box {
+	width: 100px;
+	height: @logo-height;
+	.img-logo-150;
+}
+
+.logo-text-box {
+	text-align: left;
+	line-height: @logo-height;
+	height: @logo-height;
+}
+
+.attach-right {
+	right :0px;
+	position: absolute;
+}
+
+.blue-bar {
+	background-color: @light-blue;
+	border-color: @gray;
+	padding-left: 50px;
+	border-width: 2px;
+	border-style: solid;
+	width: 250px;
+	height: 50px;
+	.attach-right
+}
