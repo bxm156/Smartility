@@ -7,5 +7,6 @@ from Smartility.apps.categories.models import Category
 class EnergyDataPoint(models.Model):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
-    date = models.DateTimeField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     value = models.DecimalField(max_digits=8, decimal_places=5)
