@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     #Begin django-allauth install
     'allauth',
+    'avatar',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
@@ -125,7 +126,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'Smartility.apps.pages'
+    'Smartility.apps.pages',
+    'Smartility.apps.categories',
+    'Smartility.apps.energydata'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -156,6 +159,11 @@ COMPRESS_PRECOMPILERS = (
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+#Social
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = '/'
+AVATAR_STORAGE_DIR = 'uploads/avatars'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

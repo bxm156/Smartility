@@ -1,0 +1,15 @@
+INSERT INTO "categories_category" VALUES ('1', 'Entertainment');
+INSERT INTO "categories_category" VALUES ('2', 'TVs');
+INSERT INTO "categories_category" VALUES ('3', 'HD DVR');
+INSERT INTO "categories_category" VALUES ('4', 'Gaming');
+INSERT INTO "categories_category" VALUES ('5', 'Audio');
+INSERT INTO "categories_category" VALUES ('6', 'Office');
+INSERT INTO "categories_category" VALUES ('7', 'Desktops');
+INSERT INTO "categories_category" VALUES ('8', 'Monitors');
+INSERT INTO "categories_category" VALUES ('9', 'Laptops');
+INSERT INTO "categories_category" VALUES ('10', 'Chargers');
+INSERT INTO "categories_category" VALUES ('11', 'Appliance');
+INSERT INTO "categories_category" VALUES ('12', 'Kitchen');
+INSERT INTO "categories_category" VALUES ('13', 'Heating');
+INSERT INTO "categories_category" VALUES ('14', 'Cooling');
+INSERT INTO "categories_category" VALUES ('15', 'Lighting');

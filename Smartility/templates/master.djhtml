@@ -1,5 +1,6 @@
 {% load static %}
 {% load compress %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -62,13 +63,61 @@
 			         }, {
 			            name: 'John',
 			            data: [5, 7, 3]
-			         }]
+			         }],
+			         credits: {
+    					enabled: false
+ 					 }
 			      });
 			   });
 		</script>
 		{% endblock javascript %}
 	</head>
 	<body>
+		<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+		    // init the FB JS SDK
+		    FB.init({
+		      appId      : '452338768166148', // App ID from the App Dashboard
+		      channelUrl : '//127.0.0.1:8000/channel.html', // Channel File for x-domain communication
+		      status     : true, // check the login status upon init?
+		      cookie     : true, // set sessions cookies to allow your server to access the session?
+		      xfbml      : true  // parse XFBML tags on this page?
+		    });
+		    // Additional initialization code such as adding Event Listeners goes here
+		    FB.getLoginStatus(function(response) {
+			  if (response.status === 'connected') {
+			    alert('Logged In!');
+			    
+			  } else if (response.status === 'not_authorized') {
+			    // not_authorized
+			  } else {
+			  login();
+			  }
+			 });		
+		  };
+		  function login() {
+		    FB.login(function(response) {
+		        if (response.authResponse) {
+		            // connected
+		        } else {
+		            // cancelled
+		        }
+		    });
+		}
+		
+		  // Load the SDK's source Asynchronously
+		  // Note that the debug version is being actively developed and might 
+		  // contain some type checks that are overly strict. 
+		  // Please report such bugs using the bugs tool.
+		  (function(d, debug){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document, /*debug*/ false));
+		</script>
 		{% block body %}
 		<div class="container">
 			<div id="header" class="block">
@@ -85,7 +134,7 @@
 			<div id="content" class="block">
 				{% block content %}
 				<div class="blue-bar">
-					<span class="login">Login</span>
+					<span class="login"><a href="javascript:FB.login()">Login</a></span>
 				</div>
 				<div class="span-24 last">
 					<div class="space-40"></div>
