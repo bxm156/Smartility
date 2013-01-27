@@ -41,34 +41,38 @@
 		<script type="text/javascript">
 			var chart1; // globally available
 			$(document).ready(function() {
-			      chart1 = new Highcharts.Chart({
+					
+				var jsonObject = $.getJSON("http://localhost:8000/data/1/", function(data) {
+	    			 chart1 = new Highcharts.Chart({
 			         chart: {
 			            renderTo: 'chartContainer',
-			            type: 'bar'
+			         	zoomType: 'x',
 			         },
 			         title: {
-			            text: 'Fruit Consumption'
+			            text: data.title
 			         },
 			         xAxis: {
-			            categories: ['Apples', 'Bananas', 'Oranges']
+			            type: 'datetime',
+			            maxZoom: 48 * 3600 * 1000
 			         },
 			         yAxis: {
 			            title: {
-			               text: 'Fruit eaten'
+			               text: 'KwH'
 			            }
 			         },
 			         series: [{
-			            name: 'Jane',
-			            data: [1, 0, 4]
-			         }, {
-			            name: 'John',
-			            data: [5, 7, 3]
+			            name: 'Usage',
+			            data: data.data,
+			            pointStart: Date.UTC(2012, 0, 1),
+			            pointInterval: 24 * 3600 * 1000 // one day
 			         }],
 			         credits: {
-    					enabled: false
- 					 }
+						enabled: false
+					 }
 			      });
-			   });
+				});				
+			     
+			 });
 		</script>
 		{% endblock javascript %}
 	</head>
@@ -87,8 +91,7 @@
 		    // Additional initialization code such as adding Event Listeners goes here
 		    FB.getLoginStatus(function(response) {
 			  if (response.status === 'connected') {
-			    alert('Logged In!');
-			    
+
 			  } else if (response.status === 'not_authorized') {
 			    // not_authorized
 			  } else {
