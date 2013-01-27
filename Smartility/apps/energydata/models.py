@@ -9,4 +9,4 @@ class EnergyDataPoint(models.Model):
     category = models.ForeignKey(Category)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    value = models.DecimalField(max_digits=8, decimal_places=5)
+    value = models.DecimalField(max_digits=11, decimal_places=8)

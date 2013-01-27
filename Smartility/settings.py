@@ -164,7 +164,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
 AVATAR_STORAGE_DIR = 'uploads/avatars'
-
+USE_TZ = True
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
