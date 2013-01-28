@@ -25,6 +25,7 @@ APP_ROOT = os.path.join(PROJECT_ROOT,APP_DIR)
 
 #For handling the database
 # DATABASE_URL - https://github.com/kennethreitz/dj-database-url
+DATABASE_URL = 'sqlite:////' + PROJECT_ROOT + '/db/sqlite.db'
 
 
 #Add the proper directories to our path
