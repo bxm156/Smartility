@@ -53,8 +53,12 @@
 					'month',
 					[1, 2, 3, 4, 6]
 				]];
+				
+				$.getJSON("/data/1/tips/", function(data) {
+					$("#tip").text(data.tip);
+				});
 					
-				var jsonObject = $.getJSON("/data/1/", function(data) {
+				var jsonObject = $.getJSON("/data/1/?cat=", function(data) {
 	    			 chart1 = new Highcharts.StockChart({
 			         chart: {
 			            renderTo: 'chartContainer',
@@ -192,6 +196,12 @@
 				<div class="span-24 last">
 					<div class="space-40"></div>
 					<div class="space-40"></div>
+					<div style="width:100%">
+						<div class="tip-bar">
+							<span id="tip" class="tip"></span>
+						</div>
+					</div>
+					<div class="space-20"></div>
 					<div id="chartContainer" style="width: 100%; height: 400px">
 						<img src="/static/images/ajax-loader.gif">
 					</div>

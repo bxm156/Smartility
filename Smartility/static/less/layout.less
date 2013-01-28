@@ -10,6 +10,10 @@ body {
 	height: 40px;
 }
 
+.space-20 {
+	height: 20px;
+}
+
 .img-logo-150 {
 	.at2x('/static/images/logo_150.png',100px, @logo-height);
 	background-size: 100px @logo-height;
@@ -41,4 +45,20 @@ body {
 	width: 250px;
 	height: 50px;
 	.attach-right
+}
+
+.tip-bar {
+	margin:auto;
+	background-color: @green;
+	border-color: @dark-green;
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+	padding-left: 40px;
+	border-style: solid;
+	border-width: 2px;
+	line-height: 2em;
+	background-image: url('/static/images/lightbulb.png');
+	background-repeat: no-repeat;
+	background-position: left;
 }
