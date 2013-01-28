@@ -14,7 +14,7 @@ def get_data(request, user_id):
     start_time = request.GET.get('start','2012-01-01 00:00:00+00:00')
     end_time = request.GET.get('end', '2012-02-01 00:00:00+00:00')
     category = request.GET.get('cat', None)
-    granularity = request.GET.get('gran', 'day')
+    granularity = request.GET.get('gran', None)
     
     datapoints = EnergyDataPoint.objects.filter(start_time__gte=start_time,end_time__lte=end_time)
     if category:
