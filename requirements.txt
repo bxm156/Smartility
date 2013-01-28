@@ -13,3 +13,4 @@ pytz==2012j
 simplejson==3.0.7
 wsgiref==0.1.2
 xlrd==0.8.0
+django-pylibmc-sasl

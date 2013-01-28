@@ -2,12 +2,15 @@
 import simplejson as json
 from random import choice
 from itertools import groupby
-from django.core.serializers.json import DjangoJSONEncoder
 
+from django.core.serializers.json import DjangoJSONEncoder
+from django.core.cache import cache
 from django.http import HttpResponse
 
 from models import EnergyDataPoint
 from Smartility.apps.categories.models import Category
+
+
 
 def get_data(request, user_id):
     response_data = {'message':'failed'}
@@ -18,12 +21,27 @@ def get_data(request, user_id):
     category = request.GET.get('cat', None)
     granularity = request.GET.get('gran', None)
     
-    datapoints = EnergyDataPoint.objects.filter(start_time__gte=start_time,end_time__lte=end_time)
+    KEY = "data_key"
+    KEY_CAT = "cat_key"
     if category:
+        KEY = KEY + category
+        
+    datapoints = cache.get(KEY)
+    
+    if not datapoints:
+        print "Cache Miss"
+        datapoints = EnergyDataPoint.objects.filter(start_time__gte=start_time,end_time__lte=end_time)
+        if category:
+            datapoints = datapoints.filter(category_id=category)
+        datapoints = datapoints.order_by('start_time')
+        cache.set(KEY,datapoints)
+    else:
+        print "Cache Hit"
+    cat = cache.get(KEY_CAT)
+    if not cat and category:
         cat = Category.objects.get(pk=category)
+        cache.set(KEY_CAT,cat)
         response_data['title'] = "{} ({})".format(response_data['title'], cat.name)
-        datapoints = datapoints.filter(category_id=category)
-    datapoints = datapoints.order_by('start_time')
 
     if granularity == "day":
         for start_date, group in groupby(datapoints, key=lambda x: x.start_time.date()):
