@@ -41,7 +41,7 @@ def get_data(request, user_id):
     if not cat and category:
         cat = Category.objects.get(pk=category)
         cache.set(KEY_CAT,cat)
-        response_data['title'] = "{} ({})".format(response_data['title'], cat.name)
+    response_data['title'] = "{} ({})".format(response_data['title'], cat.name)
 
     if granularity == "day":
         for start_date, group in groupby(datapoints, key=lambda x: x.start_time.date()):
