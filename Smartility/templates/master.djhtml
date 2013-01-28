@@ -41,6 +41,14 @@
 		<script src="{% get_static_prefix %}js/highstock.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			var chart1; // globally available
+			$.urlParam = function(name){
+    			var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+    			if (results == null) {
+    				return "";
+    			}
+    			return results[1] || "";
+			}
+			
 			$(document).ready(function() {
 				
 				var groupingUnits = [[
@@ -58,7 +66,7 @@
 					$("#tip").text(data.tip);
 				});
 					
-				var jsonObject = $.getJSON("/data/1/?cat=", function(data) {
+				var jsonObject = $.getJSON("/data/1/?cat=" + $.urlParam('cat'), function(data) {
 	    			 chart1 = new Highcharts.StockChart({
 			         chart: {
 			            renderTo: 'chartContainer',
@@ -193,19 +201,32 @@
 				<!--<div class="blue-bar">
 					<span class="login"><a href="javascript:FB.login()">Login</a></span>
 				</div>-->
-				<div class="span-24 last">
-					<div class="space-40"></div>
-					<div class="space-40"></div>
+				<div class="column span-21">
 					<div style="width:100%">
+					<div class="space-40"></div>
+					<div class="space-40"></div>
 						<div class="tip-bar">
 							<span id="tip" class="tip"></span>
 						</div>
-					</div>
 					<div class="space-20"></div>
+					</div>
+				</div>
+				<div class="column span-3 last">
+					&nbsp;
+				</div>
+				<div class="column span-21">
 					<div id="chartContainer" style="width: 100%; height: 400px">
 						<img src="/static/images/ajax-loader.gif">
 					</div>
 					<div class="space-40"></div>
+				</div>
+				
+				<div class="column precolborder span-2 last">
+					<a class="category category-text" href="/">All</a>
+					{% for cat in categories %}
+						<a class="category category-text" href="/?cat={{ cat.id }}">{{ cat.name }}</a>
+					{% endfor %}
+					
 				</div>
 				{% endblock content %}
 			</div>
