@@ -22,7 +22,6 @@ def get_data(request, user_id):
     granularity = request.GET.get('gran', None)
     
     KEY = "data_key"
-    KEY_CAT = "cat_key"
     if category:
         KEY = KEY + category
     else:
@@ -36,14 +35,16 @@ def get_data(request, user_id):
         if category:
             datapoints = datapoints.filter(category_id=category)
         datapoints = datapoints.order_by('start_time')
-        cache.set(KEY,datapoints)
+        cache.set(KEY, datapoints)
     else:
         print "Cache Hit"
-    cat = cache.get(KEY_CAT)
-    if not cat and category:
-        cat = Category.objects.get(pk=category)
-        cache.set(KEY_CAT,cat)
+
     if category:
+        KEY_CAT = "cat_key"
+        cat = cache.get(KEY_CAT + category)
+        if not cat:
+            cat = Category.objects.get(pk=category)
+            cache.set(KEY_CAT + category, cat)
         response_data['title'] = "{} ({})".format(response_data['title'], cat.name)
 
     if granularity == "day":
