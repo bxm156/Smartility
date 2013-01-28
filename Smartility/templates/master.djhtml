@@ -70,7 +70,7 @@
 			         },
 			         yAxis: {
 			            title: {
-			               text: 'KwH'
+			               text: 'Daily Cost ($)'
 			            },
 			            min: 0,
 			         },

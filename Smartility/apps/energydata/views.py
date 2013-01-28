@@ -24,12 +24,13 @@ def get_data(request, user_id):
     if granularity == "day":
         for start_date, group in groupby(datapoints, key=lambda x: x.start_time.date()):
             response_data['data'].append(sum(data.value for data in list(group)))
-            response_data['title'] = "Month of %s" % (start_date.strftime("%B"),)
         response_data['pointInterval'] = 24 * 3600 * 1000 #one day
+        
     else:
         for start_date, group in groupby(datapoints, key=lambda x: x.start_time.time()):
             response_data['data'].append(sum(data.value for data in list(group)))
         response_data['pointInterval'] = 3600 * 1000 #one hour
+    response_data['title'] = "Month of January"
     response_data['message'] = 'success'
     response_data['user'] = user_id
     return HttpResponse(json.dumps(response_data), content_type="application/json")
