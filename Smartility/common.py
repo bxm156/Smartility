@@ -25,7 +25,7 @@ APP_ROOT = os.path.join(PROJECT_ROOT,APP_DIR)
 
 #For handling the database
 # DATABASE_URL - https://github.com/kennethreitz/dj-database-url
-DATABASE_URL = 'sqlite:////' + PROJECT_ROOT + '/db/sqlite.db'
+DATABASE_URL = 'mysql://robertkaram:16dollawhore@smartility.cyu0iuvpzuaj.us-east-1.rds.amazonaws.com/smartility'
 
 
 #Add the proper directories to our path

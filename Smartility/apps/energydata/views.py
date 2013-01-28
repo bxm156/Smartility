@@ -14,7 +14,7 @@ def get_data(request, user_id):
     start_time = request.GET.get('start','2012-01-01 00:00:00+00:00')
     end_time = request.GET.get('end', '2012-02-01 00:00:00+00:00')
     category = request.GET.get('cat', None)
-    granularity = request.GET.get('gran', "day")
+    granularity = request.GET.get('gran', 'day')
     
     datapoints = EnergyDataPoint.objects.filter(start_time__gte=start_time,end_time__lte=end_time)
     if category:
@@ -25,9 +25,11 @@ def get_data(request, user_id):
         for start_date, group in groupby(datapoints, key=lambda x: x.start_time.date()):
             response_data['data'].append(sum(data.value for data in list(group)))
             response_data['title'] = "Month of %s" % (start_date.strftime("%B"),)
+        response_data['pointInterval'] = 24 * 3600 * 1000 #one day
     else:
-        for point in datapoints:
-            response_data['data'].append([point.start_time.__str__(), point.end_time.__str__(), point.category_id.__str__(), point.value])
+        for start_date, group in groupby(datapoints, key=lambda x: x.start_time.time()):
+            response_data['data'].append(sum(data.value for data in list(group)))
+        response_data['pointInterval'] = 3600 * 1000 #one hour
     response_data['message'] = 'success'
     response_data['user'] = user_id
     return HttpResponse(json.dumps(response_data), content_type="application/json")
