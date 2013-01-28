@@ -25,6 +25,8 @@ def get_data(request, user_id):
     KEY_CAT = "cat_key"
     if category:
         KEY = KEY + category
+    else:
+        KEY = KEY + "all"
         
     datapoints = cache.get(KEY)
     
