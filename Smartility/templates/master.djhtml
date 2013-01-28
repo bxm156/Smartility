@@ -190,9 +190,9 @@
 			</div>
 			<div id="content" class="block">
 				{% block content %}
-				<div class="blue-bar">
+				<!--<div class="blue-bar">
 					<span class="login"><a href="javascript:FB.login()">Login</a></span>
-				</div>
+				</div>-->
 				<div class="span-24 last">
 					<div class="space-40"></div>
 					<div class="space-40"></div>
